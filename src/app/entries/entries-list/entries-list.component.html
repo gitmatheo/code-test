@@ -1,0 +1,43 @@
+<button id="previous-btn" [disabled]="!entries?.before" (click)="getPrevious()">
+  previous
+</button>
+<button id="next-btn" [disabled]="!entries?.after" (click)="getNext()">
+  next
+</button>
+
+<select (change)="getEntries($event)">
+  <option value="5">5</option>
+  <option value="10">10</option>
+  <option value="25">25</option>
+</select>
+<div
+  *ngFor="let entry of entries?.data"
+  (click)="selectEntry(entry)"
+  class="entry"
+>
+  <div class="entry__img">
+    <img *ngIf="entry.thumbnail !== 'self'" [src]="entry.thumbnail" />
+    <img
+      *ngIf="entry.thumbnail === 'self'"
+      src="../../../assets/placeholder-image.png"
+    />
+  </div>
+
+  <ul class="entry__desc">
+    <li>
+      title: <b>{{ entry.title }}</b>
+    </li>
+    <li>
+      author: <b>{{ entry.author }}</b>
+    </li>
+    <li>
+      created: <b>{{ entry.created | date: "fullDate" }}</b>
+    </li>
+    <li>
+      number of comments: <b>{{ entry.num_comments }}</b>
+    </li>
+    <li>
+      score: <b>{{ entry.score }}</b>
+    </li>
+  </ul>
+</div>

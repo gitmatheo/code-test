@@ -1,0 +1,37 @@
+<div class="entries">
+  <div *ngIf="firstMsg">
+    <p>Hi Bannerflow</p>
+    <p>
+      Thank you for giving me the opportunity to continue the interview process.
+      This is my code assignment. There are also 2 things that I want to
+      mention.
+    </p>
+    <p>
+      1. First of all. I didn't have time to figure out why on the first request
+      from the reddit API I'm getting 2 more entries that I want, even though
+      the 'limit' query parameter is set to 5 (I'm getting 7) or 10 (I'm getting
+      12) or 25 (I'm getting 27). We can discuss it in the interview. I'm sure
+      it is a small change and I hope that's not a deal breaker.
+    </p>
+
+    <p>
+      2. Normally I would also implement 'empty' 'loading' and 'error' states
+      when fetching something from an API but it wasn't required in this case so
+      I left it as it is.
+    </p>
+    <p>3. Hide this message -> <button (click)="hideMsg()">click</button></p>
+  </div>
+
+  <app-entries-list
+    [entries]="(entries$ | async)!"
+    (entrySelected)="selectEntry($event)"
+    (loadPrevious)="loadPrevious($event)"
+    (loadNext)="loadNext($event)"
+    (changeLimit)="changeLimit($event)"
+  ></app-entries-list>
+
+  <app-modal modalID="entryDetails">
+    <p heading>Modal title</p>
+    selftext: {{ selectedEntry?.selftext }}
+  </app-modal>
+</div>
