@@ -16,9 +16,9 @@
   class="entry"
 >
   <div class="entry__img">
-    <img *ngIf="entry.thumbnail !== 'self'" [src]="entry.thumbnail" />
+    <img *ngIf="entry.thumbnail !== 'self' && entry.thumbnail !== 'nsfw' && entry.thumbnail !== 'default'" [src]="entry.thumbnail" />
     <img
-      *ngIf="entry.thumbnail === 'self'"
+      *ngIf="entry.thumbnail === 'self' || entry.thumbnail === 'nsfw' || entry.thumbnail === 'default'"
       src="../../../assets/placeholder-image.png"
     />
   </div>

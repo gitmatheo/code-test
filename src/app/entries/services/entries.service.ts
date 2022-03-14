@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { normalizeQueryParams } from 'src/app/shared/helpers';
 import { Entries } from '../interfaces/entries.interface';
@@ -22,14 +22,14 @@ export class EntriesService {
         `https://www.reddit.com/r/sweden.json${normalizeQueryParams(params)}`
       )
       .pipe(
-        mergeMap((list: any) => {
-          return of({
+        map((list: any) => {
+          return {
             after: list.data.after,
             before: list.data.before,
             data: list.data.children.map((item: any) => {
               return this.mapResponseToEntriesList(item.data);
             }),
-          });
+          };
         })
       );
   }
